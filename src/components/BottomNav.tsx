@@ -5,6 +5,8 @@ const navItems = [
   { icon: "📅", label: "Match", path: "/match" },
   { icon: "🎯", label: "Palmares", path: "/palmares" },
   { icon: "🏅", label: "Panthéon", path: "/pantheon" },
+  { icon: "📊", label: "Stats", path: "/stats" },
+  { icon: "⚙️", label: "Réglages", path: "/reglages" },
 ];
 
 const BottomNav = () => {
