@@ -14,8 +14,8 @@ interface TeamStats {
 const teams: TeamStats[] = [
   { id: 1, name: 'MILAN AC', ldh: 5, france: 1, espagne: 2, italie: 2, angleterre: 2, total: 12 },
   { id: 2, name: 'STOCKY FC', ldh: 2, france: 1, espagne: 1, italie: 1, angleterre: 2, total: 7 },
-  { id: 3, name: 'BIMBAM', ldh: null, france: 2, espagne: 1, italie: 2, angleterre: 3, total: 8 },
-  { id: 4, name: 'COMARDINHO', ldh: 1, france: 1, espagne: 2, italie: null, angleterre: null, total: 4 },
+  { id: 3, name: 'COMARDINHO', ldh: 1, france: 1, espagne: 2, italie: null, angleterre: null, total: 4 },
+  { id: 4, name: 'BIMBAM', ldh: null, france: 2, espagne: 1, italie: 2, angleterre: 3, total: 8 },
   { id: 5, name: 'DYNAMO KEV', ldh: null, france: 2, espagne: 1, italie: null, angleterre: 1, total: 4 },
   { id: 6, name: 'WARNAQUE', ldh: null, france: 1, espagne: 1, italie: null, angleterre: null, total: 2 },
   { id: 7, name: 'MAMBA TEAM', ldh: null, france: null, espagne: null, italie: 2, angleterre: null, total: 2 },
@@ -33,12 +33,14 @@ const Pantheon = () => {
   return (
     <div className="phone-screen">
       <div className="pantheon-page">
+        {/* Header with glassmorphism title */}
         <div className="pantheon-page-header">
           <div className="pantheon-title-glass">
             <h1 className="pantheon-page-title">PANTHÉON</h1>
           </div>
         </div>
 
+        {/* Table */}
         <div className="pantheon-table-wrapper">
           <div className="pantheon-table-container">
             <table className="pantheon-table">
