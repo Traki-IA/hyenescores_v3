@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Rajdhani:wght@500;600;700&amp;display=swap');
 
 @layer base {
   :root {
@@ -2079,22 +2079,15 @@
   border: 2px solid;
 }
 
-/* Others (rank 2+) - Cyan - MUST COME FIRST */
-.pantheon-rank-2 .pantheon-rank-badge,
-.pantheon-rank-3 .pantheon-rank-badge,
-.pantheon-rank-4 .pantheon-rank-badge,
-.pantheon-rank-5 .pantheon-rank-badge,
-.pantheon-rank-6 .pantheon-rank-badge,
-.pantheon-rank-7 .pantheon-rank-badge,
-.pantheon-rank-8 .pantheon-rank-badge,
-tr[class^="pantheon-rank-"] .pantheon-rank-badge {
+/* Default style for all rank badges - Cyan */
+.pantheon-rank-badge {
   background: rgba(0, 217, 255, 0.1);
   border-color: rgba(0, 217, 255, 0.6);
   color: rgba(0, 217, 255, 0.9);
 }
 
-/* Champion (rank 1) - Gold - MUST COME AFTER TO OVERRIDE */
-.pantheon-rank-1 .pantheon-rank-badge {
+/* Champion (rank 1) - Gold - Higher specificity with tr element */
+tr.pantheon-rank-1 .pantheon-rank-badge {
   background: rgba(255, 184, 48, 0.15);
   border-color: #FFB830;
   color: #FFB830;
@@ -2132,20 +2125,13 @@ tr[class^="pantheon-rank-"] .pantheon-rank-badge {
   width: 44px;
 }
 
-/* Total colors - Cyan FIRST */
-.pantheon-rank-2 .pantheon-total,
-.pantheon-rank-3 .pantheon-total,
-.pantheon-rank-4 .pantheon-total,
-.pantheon-rank-5 .pantheon-total,
-.pantheon-rank-6 .pantheon-total,
-.pantheon-rank-7 .pantheon-total,
-.pantheon-rank-8 .pantheon-total,
-tr[class^="pantheon-rank-"] .pantheon-total {
+/* Default total color - Cyan */
+.pantheon-total {
   color: #00d9ff;
 }
 
-/* Champion total - Gold AFTER TO OVERRIDE */
-.pantheon-rank-1 .pantheon-total {
+/* Champion total - Gold - Higher specificity with tr element */
+tr.pantheon-rank-1 .pantheon-total {
   color: #FFB830;
 }
 
