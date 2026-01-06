@@ -75,11 +75,12 @@
 
 /* ============================================
    COMPONENT: Page Container
+   - padding-bottom augmenté pour éviter que le contenu touche la bottom nav
    ============================================ */
 .ds-page {
   min-height: 100vh;
   background: var(--ds-color-bg);
-  padding: 50px var(--ds-space-3) var(--ds-height-bottom-nav);
+  padding: 50px var(--ds-space-3) calc(var(--ds-height-bottom-nav) + 20px);
   display: flex;
   flex-direction: column;
   gap: var(--ds-space-3);
@@ -121,6 +122,7 @@
   border-radius: var(--ds-radius-md);
   overflow: hidden;
   flex-shrink: 0;
+  position: relative;
 }
 
 .ds-filter-item {
@@ -361,6 +363,8 @@
 
 /* ============================================
    COMPONENT: Position Badge
+   - Classement: 5 couleurs (gold, green, cyan, orange, red)
+   - Panthéon: 2 couleurs (gold pour #1, cyan pour le reste)
    ============================================ */
 .ds-badge {
   display: inline-flex;
@@ -476,10 +480,31 @@
   padding: var(--ds-space-3) var(--ds-space-2);
   align-items: center;
   border-bottom: 1px solid var(--ds-gray-600);
+  position: relative;
 }
 
 .ds-match-row:last-child {
   border-bottom: none;
+}
+
+/* Match row validated - green styling */
+.ds-match-row.validated {
+  background: rgba(0, 255, 136, 0.05);
+}
+
+.ds-match-row.validated .ds-team-select {
+  border-color: rgba(0, 255, 136, 0.5) !important;
+  color: var(--ds-color-green) !important;
+}
+
+.ds-match-row.validated .ds-score-input {
+  border-color: rgba(0, 255, 136, 0.5) !important;
+  background: rgba(0, 255, 136, 0.1) !important;
+  color: var(--ds-color-green) !important;
+}
+
+.ds-match-row.validated .ds-vs {
+  color: var(--ds-color-green) !important;
 }
 
 .ds-team-select {
@@ -497,16 +522,12 @@
   color: var(--ds-gray-400);
   cursor: pointer;
   transition: all 0.2s ease;
+  overflow: hidden;
 }
 
 .ds-team-select.filled {
   color: var(--ds-color-white);
   border-color: var(--ds-glass-border-strong);
-}
-
-.ds-team-select.validated {
-  color: var(--ds-color-green);
-  border-color: rgba(0, 255, 136, 0.5);
 }
 
 .ds-score-box {
@@ -528,7 +549,7 @@
   font-family: var(--ds-font-body);
   font-size: 14px;
   font-weight: 800;
-  color: var(--ds-gray-400);
+  color: var(--ds-color-cyan);
   text-align: center;
 }
 
@@ -537,20 +558,37 @@
   border-color: var(--ds-glass-border-strong);
 }
 
-.ds-score-input.validated {
-  color: var(--ds-color-green);
-  border-color: rgba(0, 255, 136, 0.5);
-  background: rgba(0, 255, 136, 0.1);
-}
-
 .ds-vs {
   font-size: 10px;
   font-weight: 700;
   color: var(--ds-gray-400);
 }
 
-.ds-vs.validated {
-  color: var(--ds-color-green);
+/* Auto-validate button - positioned inside match row */
+.ds-match-row .auto-validate-btn {
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, var(--ds-color-cyan), var(--ds-color-green));
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.ds-match-row .auto-validate-btn:hover {
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
 }
 
 /* ============================================
@@ -602,42 +640,4 @@
 
 .ds-nav-item.active .label {
   color: var(--ds-color-cyan);
-}
-
-/* ============================================
-   UTILITY: Badge color by position
-   ============================================ */
-.ds-badge[data-position="1"] { 
-  background: rgba(255, 184, 48, 0.2);
-  border-color: rgba(255, 184, 48, 0.6);
-  color: var(--ds-color-gold);
-}
-
-.ds-badge[data-position="2"],
-.ds-badge[data-position="3"] { 
-  background: rgba(0, 255, 136, 0.15);
-  border-color: rgba(0, 255, 136, 0.5);
-  color: var(--ds-color-green);
-}
-
-.ds-badge[data-position="4"],
-.ds-badge[data-position="5"],
-.ds-badge[data-position="6"],
-.ds-badge[data-position="7"] { 
-  background: rgba(0, 217, 255, 0.15);
-  border-color: rgba(0, 217, 255, 0.5);
-  color: var(--ds-color-cyan);
-}
-
-.ds-badge[data-position="8"],
-.ds-badge[data-position="9"] { 
-  background: rgba(255, 153, 51, 0.15);
-  border-color: rgba(255, 153, 51, 0.5);
-  color: var(--ds-color-orange);
-}
-
-.ds-badge[data-position="10"] { 
-  background: rgba(255, 68, 68, 0.15);
-  border-color: rgba(255, 68, 68, 0.5);
-  color: var(--ds-color-red);
 }
