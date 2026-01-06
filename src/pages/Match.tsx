@@ -154,7 +154,6 @@ const Match = () => {
   }, [updateJourneeStats]);
 
   const validatedCount = Object.values(matches).filter((m) => m.validated).length;
-  const allValidated = validatedCount === 5;
 
   const getUsedTeams = (excludeMatchIndex?: number) => {
     const used = new Set<string>();
@@ -315,95 +314,93 @@ const Match = () => {
 
   const currentChamp = CHAMPIONNATS.find(c => c.id === championnat);
 
-  const pickerSelections = {
-    championnat: CHAMPIONNATS.map(c => c.id),
-    season: SAISONS,
-    journee: JOURNEES
-  };
-
   return (
-    <div className="phone-screen">
-      <div className="content-container match-content">
-        {/* Title with glassmorphism + glow */}
-        <div className="match-title-glass">
-          <h1 className="match-page-title">MATCH</h1>
-        </div>
+    <div className="ds-page">
+      {/* Title with glassmorphism + glow */}
+      <div className="ds-page-title">
+        <h1>Match</h1>
+      </div>
 
-        {/* 4-Segment Selection Bar */}
-        <div className="match-segment-bar">
-          <button 
-            className="match-segment"
-            onClick={() => {
-              setPickerValue({ championnat, season, journee });
-              setShowPicker(true);
-            }}
-          >
-            <span className="match-segment-icon">{currentChamp?.flag}</span>
-            <span className="match-segment-label">{currentChamp?.name}</span>
-          </button>
-          <button 
-            className="match-segment"
-            onClick={() => {
-              setPickerValue({ championnat, season, journee });
-              setShowPicker(true);
-            }}
-          >
-            <span className="match-segment-icon">📅</span>
-            <span className="match-segment-label">{season}</span>
-          </button>
-          <button 
-            className="match-segment"
-            onClick={() => {
-              setPickerValue({ championnat, season, journee });
-              setShowPicker(true);
-            }}
-          >
-            <span className="match-segment-icon">⚽</span>
-            <span className="match-segment-label">{journee} ({validatedCount}/5)</span>
-          </button>
-          <button 
-            className="match-segment match-segment-import"
-            onClick={() => setShowImportMenu(!showImportMenu)}
-          >
-            <span className="match-segment-icon">📤</span>
-            <span className="match-segment-label">Import</span>
-          </button>
-          {showImportMenu && (
-            <div className="import-menu match-import-menu">
-              <button onClick={() => fileInputRef.current?.click()}>
-                📄 Import Journée
-              </button>
-              <button onClick={() => seasonFileInputRef.current?.click()}>
-                📚 Import Saison
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* Hidden file inputs */}
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept=".csv,.txt"
-          className="hidden"
-          onChange={(e) => handleFileImport(e, false)}
-        />
-        <input
-          ref={seasonFileInputRef}
-          type="file"
-          accept=".csv,.txt"
-          className="hidden"
-          onChange={(e) => handleFileImport(e, true)}
-        />
-
-        {/* Tableau des Matchs */}
-        <div className="matches-card">
-          <div className="matches-header">
-            <span>ÉQUIPE DOM.</span>
-            <span>SCORE</span>
-            <span>ÉQUIPE EXT.</span>
+      {/* 4-Segment Selection Bar */}
+      <div className="ds-filter-bar">
+        <button 
+          className="ds-filter-item stacked active"
+          onClick={() => {
+            setPickerValue({ championnat, season, journee });
+            setShowPicker(true);
+          }}
+        >
+          <span className="icon">{currentChamp?.flag}</span>
+          <span className="label">{currentChamp?.name}</span>
+        </button>
+        <button 
+          className="ds-filter-item stacked"
+          onClick={() => {
+            setPickerValue({ championnat, season, journee });
+            setShowPicker(true);
+          }}
+        >
+          <span className="icon">📅</span>
+          <span className="label">{season}</span>
+        </button>
+        <button 
+          className="ds-filter-item stacked"
+          onClick={() => {
+            setPickerValue({ championnat, season, journee });
+            setShowPicker(true);
+          }}
+        >
+          <span className="icon">⚽</span>
+          <span className="label">{journee} ({validatedCount}/5)</span>
+        </button>
+        <button 
+          className="ds-filter-item stacked"
+          onClick={() => setShowImportMenu(!showImportMenu)}
+          style={{ background: 'var(--ds-glass-bg-active)' }}
+        >
+          <span className="icon">📤</span>
+          <span className="label">Import</span>
+        </button>
+        {showImportMenu && (
+          <div className="import-menu match-import-menu">
+            <button onClick={() => fileInputRef.current?.click()}>
+              📄 Import Journée
+            </button>
+            <button onClick={() => seasonFileInputRef.current?.click()}>
+              📚 Import Saison
+            </button>
           </div>
+        )}
+      </div>
 
+      {/* Hidden file inputs */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".csv,.txt"
+        className="hidden"
+        onChange={(e) => handleFileImport(e, false)}
+      />
+      <input
+        ref={seasonFileInputRef}
+        type="file"
+        accept=".csv,.txt"
+        className="hidden"
+        onChange={(e) => handleFileImport(e, true)}
+      />
+
+      {/* Table Card with Matches */}
+      <div className="ds-card">
+        <table className="ds-table">
+          <thead>
+            <tr>
+              <th>Équipe Dom.</th>
+              <th style={{ width: "90px" }}>Score</th>
+              <th>Équipe Ext.</th>
+            </tr>
+          </thead>
+        </table>
+        <div style={{ flex: 1, overflowY: 'auto' }}>
           {[1, 2, 3, 4, 5].map((matchIdx) => {
             const match = matches[matchIdx];
             const usedTeams = getUsedTeams(matchIdx);
@@ -418,72 +415,99 @@ const Match = () => {
             return (
               <div
                 key={matchIdx}
-                className={`match-row ${match.validated ? "validated" : ""} ${matchIdx === 1 ? "first" : ""}`}
+                className="ds-match-row"
                 {...(match.validated ? longPressHandlers : {})}
               >
-                {/* Small discrete checkmark for validated matches */}
-                {match.validated && <span className="match-validated-check">✓</span>}
-                
                 {/* Home Team Select */}
-                <select
-                  className="team-select"
-                  value={match.homeTeam}
-                  onChange={(e) => handleTeamChange(matchIdx, "homeTeam", e.target.value)}
-                  disabled={match.validated}
-                >
-                  <option value="">—</option>
-                  {TEAMS
-                    .filter(team => !usedTeams.has(team) || team === match.homeTeam)
-                    .filter(team => team !== exempt)
-                    .map((team) => (
-                      <option key={team} value={team}>
-                        {team}
-                      </option>
-                    ))}
-                </select>
+                <div className={`ds-team-select ${match.homeTeam ? (match.validated ? 'validated' : 'filled') : ''}`}>
+                  <select
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      background: 'transparent', 
+                      border: 'none', 
+                      color: 'inherit',
+                      fontFamily: 'var(--ds-font-display)',
+                      fontSize: '10px',
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      textAlign: 'center',
+                      cursor: 'pointer'
+                    }}
+                    value={match.homeTeam}
+                    onChange={(e) => handleTeamChange(matchIdx, "homeTeam", e.target.value)}
+                    disabled={match.validated}
+                  >
+                    <option value="">—</option>
+                    {TEAMS
+                      .filter(team => !usedTeams.has(team) || team === match.homeTeam)
+                      .filter(team => team !== exempt)
+                      .map((team) => (
+                        <option key={team} value={team}>
+                          {team}
+                        </option>
+                      ))}
+                  </select>
+                </div>
 
                 {/* Score inputs */}
-                <div className="score-container">
+                <div className="ds-score-box">
                   <input
                     type="number"
-                    className="score-input"
+                    className={`ds-score-input ${match.homeScore !== '' ? (match.validated ? 'validated' : 'filled') : ''}`}
                     min="0"
                     max="20"
                     placeholder="-"
                     value={match.homeScore}
                     onChange={(e) => handleScoreChange(matchIdx, "homeScore", e.target.value)}
                     disabled={match.validated}
+                    style={{ width: '32px', height: '32px', textAlign: 'center', border: 'inherit', background: 'inherit', color: 'inherit' }}
                   />
-                  <span className="vs-separator">VS</span>
+                  <span className={`ds-vs ${match.validated ? 'validated' : ''}`}>-</span>
                   <input
                     type="number"
-                    className="score-input"
+                    className={`ds-score-input ${match.awayScore !== '' ? (match.validated ? 'validated' : 'filled') : ''}`}
                     min="0"
                     max="20"
                     placeholder="-"
                     value={match.awayScore}
                     onChange={(e) => handleScoreChange(matchIdx, "awayScore", e.target.value)}
                     disabled={match.validated}
+                    style={{ width: '32px', height: '32px', textAlign: 'center', border: 'inherit', background: 'inherit', color: 'inherit' }}
                   />
                 </div>
 
                 {/* Away Team Select */}
-                <select
-                  className="team-select"
-                  value={match.awayTeam}
-                  onChange={(e) => handleTeamChange(matchIdx, "awayTeam", e.target.value)}
-                  disabled={match.validated}
-                >
-                  <option value="">—</option>
-                  {TEAMS
-                    .filter(team => !usedTeams.has(team) || team === match.awayTeam)
-                    .filter(team => team !== exempt)
-                    .map((team) => (
-                      <option key={team} value={team}>
-                        {team}
-                      </option>
-                    ))}
-                </select>
+                <div className={`ds-team-select ${match.awayTeam ? (match.validated ? 'validated' : 'filled') : ''}`}>
+                  <select
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      background: 'transparent', 
+                      border: 'none', 
+                      color: 'inherit',
+                      fontFamily: 'var(--ds-font-display)',
+                      fontSize: '10px',
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      textAlign: 'center',
+                      cursor: 'pointer'
+                    }}
+                    value={match.awayTeam}
+                    onChange={(e) => handleTeamChange(matchIdx, "awayTeam", e.target.value)}
+                    disabled={match.validated}
+                  >
+                    <option value="">—</option>
+                    {TEAMS
+                      .filter(team => !usedTeams.has(team) || team === match.awayTeam)
+                      .filter(team => team !== exempt)
+                      .map((team) => (
+                        <option key={team} value={team}>
+                          {team}
+                        </option>
+                      ))}
+                  </select>
+                </div>
 
                 {/* Auto-validate button */}
                 {!match.validated && match.homeTeam && match.awayTeam && match.homeScore !== "" && match.awayScore !== "" && (
@@ -498,18 +522,16 @@ const Match = () => {
             );
           })}
         </div>
+      </div>
 
-        {/* Exempt Card - Bottom */}
-        <div 
-          className="match-exempt-bottom"
-          onClick={() => setShowExemptPicker(true)}
-        >
-          <span className="match-exempt-label">Exempt :</span>
-          <span className="match-exempt-value">{exempt || "— Sélectionner —"}</span>
-          <span className="match-exempt-arrow">▾</span>
-        </div>
-
-        <div className="h-20" />
+      {/* Footer Bar - Exempt */}
+      <div 
+        className="ds-footer-bar"
+        onClick={() => setShowExemptPicker(true)}
+      >
+        <span className="label">Exempt :</span>
+        <span className="value">{exempt || "— Sélectionner —"}</span>
+        <span className="arrow">▾</span>
       </div>
 
       <BottomNav />
