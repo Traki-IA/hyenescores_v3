@@ -13,20 +13,13 @@ const teams = [
   { pos: 10, name: "NopiGoal FC", pts: 61, v: 15, n: 12, d: 26, bp: 86, bc: 121, diff: -35 },
 ];
 
-const getPositionClass = (pos: number) => {
+// Helper to get badge color class based on position
+const getBadgeColor = (pos: number): string => {
   if (pos === 1) return "gold";
   if (pos <= 3) return "green";
   if (pos <= 7) return "cyan";
   if (pos <= 9) return "orange";
   return "red";
-};
-
-const getZoneClass = (pos: number) => {
-  if (pos === 1) return "zone-gold";
-  if (pos <= 3) return "zone-green";
-  if (pos <= 7) return "zone-cyan";
-  if (pos <= 9) return "zone-orange";
-  return "zone-red";
 };
 
 const Index = () => {
@@ -40,118 +33,116 @@ const Index = () => {
   const strokeDashoffset = circumference - (progressPercent / 100) * circumference;
 
   return (
-    <div className="phone-screen">
-      <div className="content-container">
-        {/* Title with glassmorphism + glow */}
-        <div className="classement-title-glass">
-          <h1 className="classement-page-title">CLASSEMENT</h1>
-        </div>
+    <div className="ds-page">
+      {/* SVG Gradient Definition */}
+      <svg width="0" height="0" style={{ position: 'absolute' }}>
+        <defs>
+          <linearGradient id="gradient-progress" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#00d9ff" />
+            <stop offset="100%" stopColor="#00ff88" />
+          </linearGradient>
+        </defs>
+      </svg>
 
-        {/* Combined Menu */}
-        <button className="classement-combined-menu">
-          <span>🏆 Ligue des Hyènes</span>
-          <span className="classement-menu-separator">•</span>
-          <span>Saison 9</span>
-          <span className="classement-menu-arrow">▾</span>
+      {/* Title with glassmorphism + glow */}
+      <div className="ds-page-title">
+        <h1>Classement</h1>
+      </div>
+
+      {/* Filter Bar - Championship + Season */}
+      <div className="ds-filter-bar">
+        <button className="ds-filter-item active">
+          <span className="icon">🏆</span>
+          <span className="label">Ligue des Hyènes</span>
         </button>
+        <button className="ds-filter-item">
+          <span className="label">Saison 9</span>
+          <span className="icon" style={{ fontSize: '10px' }}>▾</span>
+        </button>
+      </div>
 
-        {/* Circular Progress Indicator */}
-        <div className="classement-progress-row">
-          <svg className="classement-progress-circle" width="36" height="36" viewBox="0 0 36 36">
-            <defs>
-              <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#00d9ff" />
-                <stop offset="100%" stopColor="#00ff88" />
-              </linearGradient>
-            </defs>
+      {/* Progress Indicator */}
+      <div className="ds-progress">
+        <div className="ds-progress-circle">
+          <svg width="32" height="32" viewBox="0 0 36 36">
             <circle
+              className="bg"
               cx="18"
               cy="18"
               r={radius}
               fill="none"
-              stroke="rgba(0, 217, 255, 0.15)"
+              stroke="rgba(255, 255, 255, 0.15)"
               strokeWidth="3"
             />
             <circle
+              className="fill"
               cx="18"
               cy="18"
               r={radius}
               fill="none"
-              stroke="url(#progressGradient)"
+              stroke="url(#gradient-progress)"
               strokeWidth="3"
               strokeLinecap="round"
               strokeDasharray={circumference}
               strokeDashoffset={strokeDashoffset}
               transform="rotate(-90 18 18)"
             />
-            <text
-              x="18"
-              y="18"
-              textAnchor="middle"
-              dominantBaseline="central"
-              className="classement-progress-text"
-            >
-              {progressPercent}%
-            </text>
           </svg>
-          <span className="classement-progress-label">
-            J.{currentMatchday} / {totalMatchdays} journées
-          </span>
+          <span className="text">{progressPercent}%</span>
         </div>
+        <span className="ds-progress-label">
+          <strong>J.{currentMatchday}</strong> / {totalMatchdays} journées
+        </span>
+      </div>
 
-        {/* Ranking Table */}
-        <div className="ranking-wrapper">
-          <table className="ranking-table">
-            <thead>
-              <tr>
-                <th style={{ width: "10%", paddingLeft: "12px" }}>#</th>
-                <th style={{ width: "31%", textAlign: "left", paddingLeft: "10px" }}>ÉQUIPE</th>
-                <th style={{ width: "15%" }}>PTS</th>
-                <th style={{ width: "18%" }}>V-N-D</th>
-                <th style={{ width: "16%" }}>BP-BC</th>
-                <th style={{ width: "10%", paddingRight: "12px" }}>+/-</th>
+      {/* Table Card */}
+      <div className="ds-card">
+        <table className="ds-table">
+          <thead>
+            <tr>
+              <th style={{ width: "40px" }}>#</th>
+              <th className="left">Équipe</th>
+              <th style={{ width: "50px" }}>Pts</th>
+              <th style={{ width: "70px" }}>V-N-D</th>
+              <th style={{ width: "60px" }}>BP-BC</th>
+              <th style={{ width: "45px" }}>+/-</th>
+            </tr>
+          </thead>
+          <tbody>
+            {teams.map((team) => (
+              <tr key={team.pos}>
+                <td>
+                  <span className={`ds-badge ${getBadgeColor(team.pos)}`}>
+                    {team.pos}
+                  </span>
+                </td>
+                <td className="left">
+                  <span className="ds-team-name">{team.name}</span>
+                </td>
+                <td>
+                  <span className="ds-points">{team.pts}</span>
+                </td>
+                <td>
+                  <span className="ds-stats">{team.v}-{team.n}-{team.d}</span>
+                </td>
+                <td>
+                  <span className="ds-stats">{team.bp}-{team.bc}</span>
+                </td>
+                <td>
+                  <span className={`ds-diff ${team.diff >= 0 ? "positive" : "negative"}`}>
+                    {team.diff >= 0 ? `+${team.diff}` : team.diff}
+                  </span>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {teams.map((team, index) => (
-                <tr 
-                  key={team.pos} 
-                  className={`${getZoneClass(team.pos)} transition-colors duration-300`}
-                  style={{ animationDelay: `${index * 50}ms` }}
-                >
-                  <td style={{ paddingLeft: "12px" }}>
-                    <div className={`position-badge ${getPositionClass(team.pos)}`}>
-                      {team.pos}
-                    </div>
-                  </td>
-                  <td style={{ textAlign: "left", paddingLeft: "8px", paddingRight: "2px" }}>
-                    <span className="team-name">{team.name}</span>
-                  </td>
-                  <td className="points-cell">{team.pts}</td>
-                  <td className="stats-cell">
-                    {team.v}-{team.n}-{team.d}
-                  </td>
-                  <td className="stats-cell">
-                    {team.bp}-{team.bc}
-                  </td>
-                  <td style={{ paddingRight: "10px", textAlign: "right" }}>
-                    <span className={team.diff >= 0 ? "diff-positive" : "diff-negative"}>
-                      {team.diff >= 0 ? `+${team.diff}` : team.diff}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-        {/* Caviste - Compact inline */}
-        <div className="classement-caviste">
-          <span className="classement-caviste-label">Caviste :</span>
-          <span className="classement-caviste-value">GUNNERS</span>
-        </div>
-
-        <div className="h-12" />
+      {/* Footer Bar - Caviste */}
+      <div className="ds-footer-bar">
+        <span className="label">Caviste :</span>
+        <span className="value">Gunners</span>
       </div>
 
       <BottomNav />
