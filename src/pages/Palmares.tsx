@@ -68,79 +68,54 @@ const Palmares = () => {
       .sort((a, b) => parseInt(b.season) - parseInt(a.season)); // Most recent first
   }, [activeChampionship]);
 
-  // Calculate dynamic stats
-  const stats = useMemo(() => {
-    if (filteredChampions.length === 0) {
-      return { dominant: "—", dominantCount: 0, record: 0 };
-    }
-
-    // Count titles per team
-    const teamCounts: Record<string, number> = {};
-    filteredChampions.forEach((item) => {
-      teamCounts[item.team] = (teamCounts[item.team] || 0) + 1;
-    });
-
-    // Find dominant team
-    const dominant = Object.keys(teamCounts).reduce((a, b) =>
-      teamCounts[a] > teamCounts[b] ? a : b
-    );
-
-    // Find record points
-    const record = Math.max(...filteredChampions.map((item) => item.points));
-
-    return { dominant, dominantCount: teamCounts[dominant], record };
-  }, [filteredChampions]);
-
   return (
-    <div className="palmares-page">
-      {/* Header with glassmorphism title */}
-      <header className="palmares-header">
-        <div className="palmares-title-glass">
-          <h1 className="palmares-page-title">PALMARÈS</h1>
-        </div>
-        
-        {/* Fused horizontal filter bar */}
-        <div className="palmares-filter-bar">
-          {CHAMPIONSHIPS.map((champ, index) => (
-            <button
-              key={champ.id}
-              className={`palmares-filter-item ${activeChampionship === champ.id ? "active" : ""} ${index === CHAMPIONSHIPS.length - 1 ? "last" : ""}`}
-              onClick={() => setActiveChampionship(champ.id)}
-              title={champ.name}
-            >
-              {champ.flag}
-            </button>
-          ))}
-        </div>
-      </header>
+    <div className="ds-page">
+      {/* Title with glassmorphism + glow */}
+      <div className="ds-page-title">
+        <h1>Palmarès</h1>
+      </div>
 
-      {/* Table with integrated header */}
-      <div className="palmares-table-card">
-        <div className="palmares-table-header">
-          <span>Saison</span>
-          <span>Champion</span>
-          <span>Points</span>
-        </div>
-        
-        <div className="palmares-table-body">
-          {filteredChampions.map((champion, index) => (
-            <div
-              key={`${champion.championship}-${champion.season}`}
-              className={`palmares-row ${index === filteredChampions.length - 1 ? "last" : ""}`}
-            >
-              <div className="season-col">
-                <span className="season-badge">{champion.season}</span>
-              </div>
-              <div className="champion-col">
-                <span className="champion-name">{champion.team}</span>
-              </div>
-              <div className="points-col">
-                <span className="points-value">{champion.points}</span>
-                <span className="points-label">pts</span>
-              </div>
-            </div>
-          ))}
-        </div>
+      {/* Filter Bar - 5 championships */}
+      <div className="ds-filter-bar">
+        {CHAMPIONSHIPS.map((champ) => (
+          <button
+            key={champ.id}
+            className={`ds-filter-item ${activeChampionship === champ.id ? "active" : ""}`}
+            onClick={() => setActiveChampionship(champ.id)}
+            title={champ.name}
+          >
+            <span className="icon">{champ.flag}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Table Card */}
+      <div className="ds-card">
+        <table className="ds-table">
+          <thead>
+            <tr>
+              <th style={{ width: "70px" }}>Saison</th>
+              <th>Champion</th>
+              <th style={{ width: "80px" }}>Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredChampions.map((champion) => (
+              <tr key={`${champion.championship}-${champion.season}`}>
+                <td>
+                  <span className="ds-season-badge">{champion.season}</span>
+                </td>
+                <td>
+                  <span className="ds-team-name">{champion.team}</span>
+                </td>
+                <td>
+                  <span className="ds-points-green">{champion.points}</span>
+                  <span className="ds-points-unit">pts</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       <BottomNav />
