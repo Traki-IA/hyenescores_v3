@@ -245,7 +245,7 @@ const Match = () => {
   // CSV Import handlers
   const parseCSV = (content: string): MatchData[] => {
     const lines = content.trim().split("\n");
-    const matches: MatchData[] = [];
+    const matchesArr: MatchData[] = [];
     
     lines.forEach((line, idx) => {
       if (idx === 0 && line.toLowerCase().includes("home")) return; // Skip header
@@ -260,7 +260,7 @@ const Match = () => {
           const hScore = parseInt(homeScore);
           const aScore = parseInt(awayScore);
           if (!isNaN(hScore) && !isNaN(aScore) && hScore >= 0 && hScore <= 20 && aScore >= 0 && aScore <= 20) {
-            matches.push({
+            matchesArr.push({
               homeTeam,
               awayTeam,
               homeScore: homeScore,
@@ -271,7 +271,7 @@ const Match = () => {
         }
       }
     });
-    return matches;
+    return matchesArr;
   };
 
   const handleFileImport = (e: React.ChangeEvent<HTMLInputElement>, isSeason: boolean) => {
@@ -404,10 +404,12 @@ const Match = () => {
           {[1, 2, 3, 4, 5].map((matchIdx) => {
             const match = matches[matchIdx];
             const usedTeams = getUsedTeams(matchIdx);
+            const isValidated = match.validated;
+            const canValidate = !isValidated && match.homeTeam && match.awayTeam && match.homeScore !== "" && match.awayScore !== "";
             
             // Long press handler for validated matches
             const longPressHandlers = useLongPress(() => {
-              if (match.validated) {
+              if (isValidated) {
                 setShowEditModal(matchIdx);
               }
             }, 800);
@@ -415,11 +417,11 @@ const Match = () => {
             return (
               <div
                 key={matchIdx}
-                className="ds-match-row"
-                {...(match.validated ? longPressHandlers : {})}
+                className={`ds-match-row ${isValidated ? "validated" : ""}`}
+                {...(isValidated ? longPressHandlers : {})}
               >
                 {/* Home Team Select */}
-                <div className={`ds-team-select ${match.homeTeam ? (match.validated ? 'validated' : 'filled') : ''}`}>
+                <div className={`ds-team-select ${match.homeTeam ? 'filled' : ''}`}>
                   <select
                     style={{ 
                       width: '100%', 
@@ -432,11 +434,12 @@ const Match = () => {
                       fontWeight: 700,
                       textTransform: 'uppercase',
                       textAlign: 'center',
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      outline: 'none'
                     }}
                     value={match.homeTeam}
                     onChange={(e) => handleTeamChange(matchIdx, "homeTeam", e.target.value)}
-                    disabled={match.validated}
+                    disabled={isValidated}
                   >
                     <option value="">—</option>
                     {TEAMS
@@ -454,31 +457,29 @@ const Match = () => {
                 <div className="ds-score-box">
                   <input
                     type="number"
-                    className={`ds-score-input ${match.homeScore !== '' ? (match.validated ? 'validated' : 'filled') : ''}`}
+                    className={`ds-score-input ${match.homeScore !== '' ? 'filled' : ''}`}
                     min="0"
                     max="20"
                     placeholder="-"
                     value={match.homeScore}
                     onChange={(e) => handleScoreChange(matchIdx, "homeScore", e.target.value)}
-                    disabled={match.validated}
-                    style={{ width: '32px', height: '32px', textAlign: 'center', border: 'inherit', background: 'inherit', color: 'inherit' }}
+                    disabled={isValidated}
                   />
-                  <span className={`ds-vs ${match.validated ? 'validated' : ''}`}>-</span>
+                  <span className="ds-vs">-</span>
                   <input
                     type="number"
-                    className={`ds-score-input ${match.awayScore !== '' ? (match.validated ? 'validated' : 'filled') : ''}`}
+                    className={`ds-score-input ${match.awayScore !== '' ? 'filled' : ''}`}
                     min="0"
                     max="20"
                     placeholder="-"
                     value={match.awayScore}
                     onChange={(e) => handleScoreChange(matchIdx, "awayScore", e.target.value)}
-                    disabled={match.validated}
-                    style={{ width: '32px', height: '32px', textAlign: 'center', border: 'inherit', background: 'inherit', color: 'inherit' }}
+                    disabled={isValidated}
                   />
                 </div>
 
                 {/* Away Team Select */}
-                <div className={`ds-team-select ${match.awayTeam ? (match.validated ? 'validated' : 'filled') : ''}`}>
+                <div className={`ds-team-select ${match.awayTeam ? 'filled' : ''}`}>
                   <select
                     style={{ 
                       width: '100%', 
@@ -491,11 +492,12 @@ const Match = () => {
                       fontWeight: 700,
                       textTransform: 'uppercase',
                       textAlign: 'center',
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      outline: 'none'
                     }}
                     value={match.awayTeam}
                     onChange={(e) => handleTeamChange(matchIdx, "awayTeam", e.target.value)}
-                    disabled={match.validated}
+                    disabled={isValidated}
                   >
                     <option value="">—</option>
                     {TEAMS
@@ -509,8 +511,8 @@ const Match = () => {
                   </select>
                 </div>
 
-                {/* Auto-validate button */}
-                {!match.validated && match.homeTeam && match.awayTeam && match.homeScore !== "" && match.awayScore !== "" && (
+                {/* Auto-validate button - only show when can validate */}
+                {canValidate && (
                   <button
                     className="auto-validate-btn"
                     onClick={() => validateMatch(matchIdx)}
