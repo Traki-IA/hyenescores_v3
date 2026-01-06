@@ -8,22 +8,22 @@
 
 ## 📊 État des Pages
 
-| Page | CSS Legacy | Design System v4 | Status |
-|------|------------|------------------|--------|
-| **Classement** | ✅ | 🔄 Migration | En cours |
-| **Match** | ✅ | 🔄 Migration | En cours |
-| **Palmarès** | ✅ | 🔄 Migration | En cours |
-| **Panthéon** | ✅ | 🔄 Migration | En cours |
+| Page | Design System v4 | Status |
+|------|------------------|--------|
+| **Classement** | ✅ Migré | 🟢 Terminé |
+| **Match** | ✅ Migré | 🟢 Terminé |
+| **Palmarès** | ✅ Migré | 🟢 Terminé |
+| **Panthéon** | ✅ Migré | 🟢 Terminé |
 
 ---
 
-## 🎨 Design System v4.0 (NOUVEAU)
+## 🎨 Design System v4.0
 
 ### Architecture fichiers
 ```
 src/
-├── index.css           # CSS legacy (à migrer progressivement)
-├── design-system.css   # ✨ NOUVEAU: Composants unifiés ds-*
+├── index.css           # CSS legacy (conservé pour modals/pickers)
+├── design-system.css   # ✨ Composants unifiés ds-*
 └── main.tsx            # Import des deux CSS
 ```
 
@@ -87,19 +87,19 @@ hyenescores_v2/
 │   └── mockups/
 │       ├── hyenescores-maquette-v3.0-final.html
 │       ├── hyenescores-maquette-v3.1-corrections.html
-│       └── hyenescores-design-system-v4.0.html  ← NOUVEAU
+│       └── hyenescores-design-system-v4.0.html
 ├── public/
 │   ├── manifest.json    # PWA config
 │   └── icon-*.png       # Icônes PWA
 ├── src/
-│   ├── index.css        # CSS legacy 43KB
-│   ├── design-system.css # ✨ DS v4.0 14KB
+│   ├── index.css        # CSS legacy (modals, pickers)
+│   ├── design-system.css # Design System v4.0
 │   ├── main.tsx         # Entry point
 │   ├── pages/
-│   │   ├── Index.tsx    # Classement
-│   │   ├── Match.tsx    # Match
-│   │   ├── Palmares.tsx # Palmarès
-│   │   └── Pantheon.tsx # Panthéon
+│   │   ├── Index.tsx    # Classement ✅ DS v4
+│   │   ├── Match.tsx    # Match ✅ DS v4
+│   │   ├── Palmares.tsx # Palmarès ✅ DS v4
+│   │   └── Pantheon.tsx # Panthéon ✅ DS v4
 │   └── components/
 │       └── BottomNav.tsx
 ├── index.html           # PWA meta tags
@@ -111,19 +111,24 @@ hyenescores_v2/
 
 ## 🚀 Prochaines Étapes
 
-### Phase 1 : Migration Design System (En cours)
-- [ ] Migrer Classement vers classes ds-*
-- [ ] Migrer Match vers classes ds-*
-- [ ] Migrer Palmarès vers classes ds-*
-- [ ] Migrer Panthéon vers classes ds-*
-- [ ] Supprimer CSS legacy obsolète
+### Phase 1 : Migration Design System ✅ COMPLÈTE
+- [x] Créer design-system.css avec tokens et composants
+- [x] Migrer Classement vers classes ds-*
+- [x] Migrer Match vers classes ds-*
+- [x] Migrer Palmarès vers classes ds-*
+- [x] Migrer Panthéon vers classes ds-*
 
-### Phase 2 : Données
+### Phase 2 : Nettoyage & Optimisation
+- [ ] Supprimer CSS legacy obsolète dans index.css
+- [ ] Unifier les modals/pickers avec DS v4
+- [ ] Tests sur différents devices
+
+### Phase 3 : Données
 - [ ] Créer fichiers JSON de données
 - [ ] Connecter les pages aux données
 - [ ] Import/Export fonctionnel
 
-### Phase 3 : Fonctionnalités
+### Phase 4 : Fonctionnalités
 - [ ] Pages Stats et Réglages
 - [ ] Persistance localStorage
 - [ ] Animations/transitions
@@ -134,35 +139,14 @@ hyenescores_v2/
 
 | Date | SHA | Message |
 |------|-----|---------|
+| 2026-01-06 | 8b84800 | 🎨 Migrate Match to Design System v4.0 |
+| 2026-01-06 | 620e12c | 🎨 Migrate Classement to Design System v4.0 |
+| 2026-01-06 | 110ca0b | 🎨 Migrate Panthéon to Design System v4.0 |
+| 2026-01-06 | 354de58 | 🎨 Migrate Palmarès to Design System v4.0 |
+| 2026-01-06 | 76bf8a5 | 📝 Update PROJECT_STATUS.md with Design System v4.0 docs |
 | 2026-01-06 | 64fd10a | 🎨 Import Design System v4.0 in main.tsx |
 | 2026-01-06 | 562ac4d | 🎨 Add Design System v4.0 CSS components |
 | 2026-01-06 | e037ee3 | 📐 Add Design System v4.0 mockup |
-| 2026-01-06 | 46b94d1 | 📱 Add PWA icons for iOS home screen |
-| 2026-01-06 | 445d930 | 🎨 Fix Palmarès background → #000000 |
-
----
-
-## 💡 Guide Migration vers DS v4.0
-
-Pour migrer une page :
-
-1. Remplacer le container par `.ds-page`
-2. Utiliser `.ds-page-title` pour le titre
-3. Utiliser `.ds-filter-bar` + `.ds-filter-item` pour les filtres
-4. Utiliser `.ds-card` + `.ds-table` pour les tableaux
-5. Utiliser `.ds-badge.{color}` pour les badges
-6. Utiliser `.ds-footer-bar` pour Caviste/Exempt
-
-**Exemple :**
-```tsx
-// Avant
-<div className="palmares-page">
-  <div className="palmares-title-glass">...</div>
-  
-// Après
-<div className="ds-page">
-  <div className="ds-page-title">...</div>
-```
 
 ---
 
