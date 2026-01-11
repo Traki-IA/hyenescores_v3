@@ -323,40 +323,42 @@ const Match = () => {
 
       {/* 4-Segment Selection Bar */}
       <div className="ds-filter-bar">
-        <button 
+        {/* CHAMPIONNAT - Drapeau SEUL */}
+        <button
           className="ds-filter-item stacked active"
           onClick={() => {
             setPickerValue({ championnat, season, journee });
             setShowPicker(true);
           }}
         >
-          <span className="icon">{currentChamp?.flag}</span>
-          <span className="label">{currentChamp?.name}</span>
+          <span className="icon" style={{ fontSize: '28px' }}>{currentChamp?.flag}</span>
         </button>
-        <button 
+        {/* SAISON - Texte SEUL (pas d'emoji) */}
+        <button
           className="ds-filter-item stacked"
           onClick={() => {
             setPickerValue({ championnat, season, journee });
             setShowPicker(true);
           }}
         >
-          <span className="icon">📅</span>
-          <span className="label">{season}</span>
+          <span className="label">Saison {season.replace('S', '')}</span>
         </button>
-        <button 
+        {/* JOURNÉE - Texte adapté (pas de ballon) */}
+        <button
           className="ds-filter-item stacked"
           onClick={() => {
             setPickerValue({ championnat, season, journee });
             setShowPicker(true);
           }}
         >
-          <span className="icon">⚽</span>
-          <span className="label">{journee} ({validatedCount}/5)</span>
+          <span className="label">{journee}</span>
+          <span className="sublabel">({validatedCount}/5)</span>
         </button>
-        <button 
+        {/* IMPORT - Reste identique */}
+        <button
           className="ds-filter-item stacked"
           onClick={() => setShowImportMenu(!showImportMenu)}
-          style={{ background: 'var(--ds-glass-bg-active)' }}
+          style={{ flex: 0.8 }}
         >
           <span className="icon">📤</span>
           <span className="label">Import</span>

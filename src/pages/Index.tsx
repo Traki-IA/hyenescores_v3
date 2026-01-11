@@ -27,72 +27,35 @@ const Index = () => {
   const currentMatchday = 53;
   const totalMatchdays = 72;
 
-  // Calculate stroke dasharray for circular progress
-  const radius = 14;
-  const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (progressPercent / 100) * circumference;
-
   return (
     <div className="ds-page">
-      {/* SVG Gradient Definition */}
-      <svg width="0" height="0" style={{ position: 'absolute' }}>
-        <defs>
-          <linearGradient id="gradient-progress" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#00d9ff" />
-            <stop offset="100%" stopColor="#00ff88" />
-          </linearGradient>
-        </defs>
-      </svg>
-
       {/* Title with glassmorphism + glow */}
       <div className="ds-page-title">
         <h1>Classement</h1>
       </div>
 
-      {/* Filter Bar - Championship + Season */}
-      <div className="ds-filter-bar">
-        <button className="ds-filter-item active">
-          <span className="icon">🏆</span>
-          <span className="label">Ligue des Hyènes</span>
-        </button>
-        <button className="ds-filter-item">
-          <span className="label">Saison 9</span>
-          <span className="icon" style={{ fontSize: '10px' }}>▾</span>
-        </button>
-      </div>
-
-      {/* Progress Indicator */}
-      <div className="ds-progress">
-        <div className="ds-progress-circle">
-          <svg width="32" height="32" viewBox="0 0 36 36">
-            <circle
-              className="bg"
-              cx="18"
-              cy="18"
-              r={radius}
-              fill="none"
-              stroke="rgba(255, 255, 255, 0.15)"
-              strokeWidth="3"
-            />
-            <circle
-              className="fill"
-              cx="18"
-              cy="18"
-              r={radius}
-              fill="none"
-              stroke="url(#gradient-progress)"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeDasharray={circumference}
-              strokeDashoffset={strokeDashoffset}
-              transform="rotate(-90 18 18)"
-            />
-          </svg>
-          <span className="text">{progressPercent}%</span>
+      {/* Filter Bar - 2 lignes */}
+      <div className="ds-filter-bar-2lines">
+        {/* Ligne 1: Ligue + Saison */}
+        <div className="ds-filter-line1">
+          <span>🏆</span>
+          <span>Ligue des Hyènes</span>
+          <span className="ds-filter-separator">|</span>
+          <span>Saison 9</span>
+          <span className="ds-filter-arrow">▾</span>
         </div>
-        <span className="ds-progress-label">
-          <strong>J.{currentMatchday}</strong> / {totalMatchdays} journées
-        </span>
+
+        {/* Ligne 2: Progress */}
+        <div className="ds-progress-line">
+          <span className="ds-progress-label">J.{currentMatchday}/{totalMatchdays}</span>
+          <div className="ds-progress-bar">
+            <div
+              className="ds-progress-fill"
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
+          <span className="ds-progress-percent">{progressPercent}%</span>
+        </div>
       </div>
 
       {/* Table Card */}
