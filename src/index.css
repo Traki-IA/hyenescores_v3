@@ -401,6 +401,378 @@
   }
 
 /* ================================================
+   DESIGN SYSTEM - CLASSES GLOBALES v3.1
+   ================================================ */
+
+/* Page container */
+.ds-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+}
+
+/* Page title */
+.ds-page-title {
+  background: rgba(0, 217, 255, 0.05);
+  border: 1px solid rgba(0, 217, 255, 0.4);
+  border-radius: 10px;
+  padding: 10px 12px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.ds-page-title h1 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: #00d9ff;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 10px rgba(0, 217, 255, 0.8),
+    0 0 20px rgba(0, 217, 255, 0.5),
+    0 0 40px rgba(0, 217, 255, 0.3);
+  margin: 0;
+}
+
+/* Filter Bar */
+.ds-filter-bar {
+  display: flex;
+  background: rgba(0, 217, 255, 0.02);
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  border-radius: 10px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.ds-filter-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 4px;
+  background: transparent;
+  border: none;
+  border-right: 1px solid rgba(0, 217, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Rajdhani', sans-serif;
+  color: #ffffff;
+}
+
+.ds-filter-item:last-child {
+  border-right: none;
+}
+
+.ds-filter-item:hover {
+  background: rgba(0, 217, 255, 0.1);
+}
+
+.ds-filter-item.active {
+  background: rgba(0, 217, 255, 0.15);
+}
+
+.ds-filter-item .icon {
+  font-size: 18px;
+}
+
+.ds-filter-item .label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ds-filter-item.stacked {
+  flex-direction: column;
+}
+
+/* Card container */
+.ds-card {
+  flex: 1;
+  background: rgba(0, 217, 255, 0.03);
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  border-radius: 12px;
+  padding: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Table */
+.ds-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ds-table thead {
+  background: rgba(0, 217, 255, 0.12);
+  border-bottom: 2px solid rgba(0, 217, 255, 0.3);
+}
+
+.ds-table th {
+  padding: 10px 8px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: white;
+  text-align: center;
+  letter-spacing: 1.5px;
+}
+
+.ds-table th.left {
+  text-align: left;
+}
+
+.ds-table tbody tr {
+  border-bottom: 1px solid rgba(0, 217, 255, 0.08);
+  transition: background 0.2s ease;
+}
+
+.ds-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.ds-table tbody tr:hover {
+  background: rgba(0, 217, 255, 0.08);
+}
+
+.ds-table td {
+  padding: 10px 8px;
+  text-align: center;
+  font-family: 'Rajdhani', sans-serif;
+  color: white;
+}
+
+.ds-table td.left {
+  text-align: left;
+}
+
+/* Badge */
+.ds-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  border-radius: 6px;
+  border: 1px solid;
+}
+
+.ds-badge.gold {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: rgba(255, 215, 0, 0.4);
+  color: #ffd700;
+}
+
+.ds-badge.green {
+  background: rgba(0, 255, 136, 0.15);
+  border-color: rgba(0, 255, 136, 0.4);
+  color: #00ff88;
+}
+
+.ds-badge.cyan {
+  background: rgba(0, 217, 255, 0.15);
+  border-color: rgba(0, 217, 255, 0.4);
+  color: #00d9ff;
+}
+
+.ds-badge.orange {
+  background: rgba(255, 153, 51, 0.15);
+  border-color: rgba(255, 153, 51, 0.4);
+  color: #ff9933;
+}
+
+.ds-badge.red {
+  background: rgba(255, 68, 68, 0.15);
+  border-color: rgba(255, 68, 68, 0.4);
+  color: #ff4444;
+}
+
+/* Team name */
+.ds-team-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: white;
+}
+
+/* Points */
+.ds-points {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  color: #00d9ff;
+  text-shadow: 0 0 12px rgba(0, 217, 255, 0.6);
+}
+
+.ds-points-green {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: #00ff88;
+  text-shadow: 0 0 12px rgba(0, 255, 136, 0.6);
+}
+
+.ds-points-unit {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  margin-left: 3px;
+}
+
+/* Season badge */
+.ds-season-badge {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: #00d9ff;
+  background: rgba(0, 217, 255, 0.15);
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 217, 255, 0.4);
+  min-width: 32px;
+  text-align: center;
+  display: inline-block;
+}
+
+/* Stats */
+.ds-stats {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: #aaaaaa;
+}
+
+/* Diff */
+.ds-diff {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.ds-diff.positive {
+  color: #00ff88;
+  text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+}
+
+.ds-diff.negative {
+  color: #ff4444;
+  text-shadow: 0 0 8px rgba(255, 68, 68, 0.4);
+}
+
+/* Empty cell */
+.ds-empty {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 12px;
+}
+
+/* Total */
+.ds-total {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: #00d9ff;
+}
+
+.ds-total.gold {
+  color: #FFB830;
+}
+
+/* Match row */
+.ds-match-row {
+  display: grid;
+  grid-template-columns: 1fr 90px 1fr;
+  gap: 8px;
+  padding: 12px 8px;
+  border-bottom: 1px solid rgba(0, 217, 255, 0.08);
+  position: relative;
+  align-items: center;
+  transition: background 0.3s ease;
+}
+
+.ds-match-row:hover {
+  background: rgba(0, 217, 255, 0.05);
+}
+
+.ds-match-row:last-child {
+  border-bottom: none;
+}
+
+/* Team select */
+.ds-team-select {
+  background: transparent;
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  border-radius: 6px;
+  padding: 8px 6px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: white;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.ds-team-select.filled {
+  border-color: rgba(0, 217, 255, 0.4);
+  color: #00d9ff;
+}
+
+/* Score box */
+.ds-score-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.ds-score-input {
+  width: 38px;
+  height: 38px;
+  background: rgba(0, 217, 255, 0.05);
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: #00d9ff;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.ds-score-input.filled {
+  background: rgba(0, 217, 255, 0.1);
+  border-color: rgba(0, 217, 255, 0.5);
+}
+
+.ds-score-input:focus {
+  border-color: #00d9ff;
+  background: rgba(0, 217, 255, 0.15);
+  outline: none;
+}
+
+.ds-vs {
+  font-size: 10px;
+  font-weight: 700;
+  color: #666;
+}
+
+/* ================================================
    CLASSEMENT PAGE v3.1 STYLES
    ================================================ */
 
@@ -462,49 +834,85 @@
   margin-left: 4px;
 }
 
-/* Circular Progress Indicator */
-.classement-progress-row {
+/* Filter Bar 2 lignes - Classement */
+.ds-filter-bar-2lines {
+  background: rgba(0, 217, 255, 0.02);
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+}
+
+/* Ligne 1: Filtres principaux */
+.ds-filter-line1 {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-
-.classement-progress-circle {
-  flex-shrink: 0;
-}
-
-.classement-progress-text {
-  font-family: 'Inter', sans-serif;
-  font-size: 9px;
-  font-weight: 800;
-  fill: #00d9ff;
-}
-
-.classement-progress-label {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 12px;
+  gap: 6px;
+  font-size: 13px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  color: #fff;
+  margin-bottom: 6px;
 }
 
-/* Caviste Compact */
-.classement-caviste {
+.ds-filter-separator {
+  color: rgba(255, 255, 255, 0.3);
+  margin: 0 4px;
+}
+
+.ds-filter-arrow {
+  margin-left: auto;
+  opacity: 0.4;
+}
+
+/* Ligne 2: Progress bar */
+.ds-progress-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.ds-progress-label {
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+}
+
+.ds-progress-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.ds-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00d9ff, #00ff88);
+  box-shadow: 0 0 6px rgba(0, 217, 255, 0.5);
+}
+
+.ds-progress-percent {
+  color: #00d9ff;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* Caviste ROUGE HIGHLIGHT */
+.ds-footer-bar {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: rgba(0, 217, 255, 0.02);
-  border: 1px solid rgba(0, 217, 255, 0.2);
+  background: rgba(255, 51, 102, 0.1);
+  border: 1px solid rgba(255, 51, 102, 0.4);
   border-radius: 10px;
-  padding: 6px 12px;
-  margin: 8px 8px 0;
+  padding: 8px 12px;
+  margin-top: 12px;
 }
 
-.classement-caviste-label {
+.ds-footer-bar .label {
   font-family: 'Rajdhani', sans-serif;
   font-size: 9px;
   font-weight: 600;
@@ -512,9 +920,9 @@
   text-transform: uppercase;
 }
 
-.classement-caviste-value {
+.ds-footer-bar .value {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 800;
   color: #ff3366;
   text-transform: uppercase;
@@ -779,6 +1187,14 @@
   text-transform: uppercase;
   color: #ffffff;
   white-space: nowrap;
+}
+
+/* Sublabel pour journée */
+.ds-filter-item .sublabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 2px;
 }
 
 .match-segment-import {
@@ -1088,15 +1504,18 @@
   margin: 0;
 }
 
+/* Validation = Entourage VERT (pas de rond) */
 .match-row.validated .team-select {
-  border-color: rgba(0, 255, 136, 0.4);
+  border: 2px solid #00ff88;
   color: #00ff88;
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.3);
 }
 
 .match-row.validated .score-input {
-  background: rgba(0, 255, 136, 0.1);
-  border-color: rgba(0, 255, 136, 0.4);
+  background: rgba(0, 255, 136, 0.15);
+  border: 2px solid #00ff88;
   color: #00ff88;
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.3);
 }
 
 .match-row.validated .vs-separator {
@@ -1701,10 +2120,12 @@
    PALMARES PAGE v3.1 - NOIR PUR + FUSED BAR
    ============================================ */
 
+/* Padding bottom pour séparation barre nav */
 .palmares-page {
   min-height: 100vh;
   background: #000000;
   padding: 16px 12px 80px;
+  padding-bottom: 80px;
 }
 
 /* Header */
@@ -1805,6 +2226,7 @@
 .palmares-table-body {
   max-height: calc(100vh - 240px);
   overflow-y: auto;
+  padding-bottom: 16px;
 }
 
 /* Table Row */
@@ -1874,10 +2296,11 @@
   gap: 3px;
 }
 
+/* Points en BOLD maximum */
 .points-value {
   font-family: 'Rajdhani', sans-serif;
   font-size: 20px;
-  font-weight: 900;
+  font-weight: 900; /* Changé de 800 → 900 */
   color: #00ff88;
   text-shadow: 0 0 12px rgba(0, 255, 136, 0.6);
   line-height: 1;
@@ -1949,9 +2372,11 @@
    PANTHEON PAGE STYLES - ULTRA COMPACT TABLE v3.1
    ================================================ */
 
+/* Padding bottom pour séparation barre nav */
 .pantheon-page {
   min-height: 100vh;
   background: #000000;
+  padding-bottom: 80px;
 }
 
 .pantheon-page-header {
@@ -1982,7 +2407,7 @@
 }
 
 .pantheon-table-wrapper {
-  padding: 0 16px;
+  padding: 0 16px 16px;
 }
 
 .pantheon-table-container {
