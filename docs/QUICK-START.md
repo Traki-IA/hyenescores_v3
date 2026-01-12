@@ -11,11 +11,12 @@
 ## 📖 Table des Matières
 
 1. [Vue d'Ensemble](#vue-densemble)
-2. [Installation](#installation)
-3. [Structure Projet](#structure-projet)
-4. [Workflows](#workflows)
-5. [Design System](#design-system)
-6. [Commandes Utiles](#commandes-utiles)
+2. [🔴 RÈGLE D'OR - VALIDATION OBLIGATOIRE](#-règle-dor---validation-obligatoire)
+3. [Installation](#installation)
+4. [Structure Projet](#structure-projet)
+5. [Workflows](#workflows)
+6. [Design System](#design-system)
+7. [Commandes Utiles](#commandes-utiles)
 
 ---
 
@@ -32,6 +33,138 @@ Application web de gestion pour la **"Ligue des Hyènes"**, une ligue de fantasy
 - ✅ Cohérence couleurs (cyan primary, gold champions)
 - ✅ Responsive mobile-first (390px viewport)
 - ✅ Maximum densité information sans scroll
+
+---
+
+## 🔴 RÈGLE D'OR - VALIDATION OBLIGATOIRE
+
+### ⚠️ RÈGLE ABSOLUE : ZÉRO INTERPRÉTATION
+
+**Claude NE PEUT JAMAIS :**
+- Interpréter une demande
+- Prendre des décisions de design
+- Modifier quoi que ce soit sans validation visuelle explicite
+- Créer une TASK sans que l'utilisateur ait validé des maquettes visuelles
+
+**Claude DOIT TOUJOURS :**
+- Proposer 4 variants visuels AVANT toute modification
+- Attendre la validation explicite de l'utilisateur
+- Implémenter UNIQUEMENT ce qui a été validé visuellement
+- Suivre À LA LETTRE les choix de l'utilisateur
+
+---
+
+### 🚫 CE QUI EST INTERDIT
+
+❌ **"Je vais corriger le caviste"** → NON, montre 4 façons de le corriger, attends validation  
+❌ **"Je vais améliorer la validation"** → NON, montre 4 options, attends validation  
+❌ **"Je pense que..."** → NON, l'utilisateur décide, pas Claude  
+❌ **Créer TASK-XXX puis demander validation** → NON, valider AVANT création task  
+
+---
+
+### ✅ WORKFLOW OBLIGATOIRE
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  ÉTAPE 1 : PROBLÈME IDENTIFIÉ                          │
+│  → Utilisateur montre screenshots/décrit problème       │
+└─────────────────────────────────────────────────────────┘
+                         ⬇️
+┌─────────────────────────────────────────────────────────┐
+│  ÉTAPE 2 : CLAUDE CRÉE 4 VARIANTS VISUELS              │
+│  → Artifact React avec 4 solutions différentes          │
+│  → Maquettes interactives ou images                     │
+│  ⚠️ AUCUNE TASK CRÉÉE À CE STADE                       │
+└─────────────────────────────────────────────────────────┘
+                         ⬇️
+┌─────────────────────────────────────────────────────────┐
+│  ÉTAPE 3 : UTILISATEUR VALIDE                          │
+│  → "Je veux V2 pour Classement, V1 pour Match"         │
+│  → Validation EXPLICITE et DÉTAILLÉE                    │
+│  ⚠️ SI PAS DE VALIDATION = STOP ICI                    │
+└─────────────────────────────────────────────────────────┘
+                         ⬇️
+┌─────────────────────────────────────────────────────────┐
+│  ÉTAPE 4 : CLAUDE CRÉE TASK AVEC CHOIX VALIDÉS         │
+│  → TASK-XXX.md contient UNIQUEMENT ce qui est validé   │
+│  → Specs ultra-précises basées sur variants choisis     │
+│  → Push GitHub                                          │
+└─────────────────────────────────────────────────────────┘
+                         ⬇️
+┌─────────────────────────────────────────────────────────┐
+│  ÉTAPE 5 : IMPLÉMENTATION                              │
+│  → Claude Code lit TASK-XXX.md                          │
+│  → Implémente exactement ce qui est dans la task       │
+│  → Aucune initiative personnelle autorisée              │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+### ❗ EXEMPLES D'APPLICATION
+
+#### ✅ CORRECT
+
+**Utilisateur** : "Le caviste est invisible, il faut scroller"
+
+**Claude** :
+```
+Je te crée 4 variants pour résoudre ce problème :
+
+V1: Réduire tous les paddings (caviste visible sans scroll)
+V2: Caviste en overlay flottant
+V3: Tableau ultra-compact (rows 36px)
+V4: Indicateur "scroll pour voir caviste"
+
+[Artifact avec 4 maquettes]
+
+Quel variant préfères-tu ?
+```
+
+**Utilisateur** : "V1"
+
+**Claude** : [Crée TASK-XXX avec spécifications exactes de V1]
+
+---
+
+#### ❌ INCORRECT
+
+**Utilisateur** : "Le caviste est invisible, il faut scroller"
+
+**Claude** :
+```
+Je vais créer une TASK pour réduire les marges
+et rendre le caviste visible.
+
+[Crée TASK-004 et push GitHub]
+
+C'est prêt, lance Claude Code !
+```
+
+**PROBLÈME** : Aucune validation visuelle, Claude a interprété la solution.
+
+---
+
+### 🎯 PRINCIPE FONDAMENTAL
+
+> **L'UTILISATEUR EST LE SEUL DÉCIDEUR.**  
+> Claude est un PROPOSEUR, pas un DÉCIDEUR.  
+> Toute modification visuelle = 4 variants + validation AVANT task.
+
+---
+
+### 📋 CHECKLIST AVANT TOUTE TASK
+
+Avant de créer `docs/tasks/TASK-XXX.md`, vérifier :
+
+- [ ] Des variants visuels ont été proposés (minimum 2, idéalement 4)
+- [ ] L'utilisateur a explicitement validé UN variant
+- [ ] La TASK ne contient QUE ce qui a été validé
+- [ ] Aucune "amélioration bonus" n'a été ajoutée
+- [ ] Aucune interprétation personnelle de Claude
+
+**Si une seule case est NON → NE PAS CRÉER LA TASK**
 
 ---
 
@@ -308,6 +441,8 @@ claude-code "Harmonise glassmorphism sur page Match"
 - Rajdhani pour headers, Inter pour body
 - Tester avec données réelles (pas de mocks)
 - Commit messages en anglais avec type prefix
+- **TOUJOURS proposer 4 variants avant modification**
+- **TOUJOURS attendre validation explicite**
 
 ### ❌ À ÉVITER
 
@@ -317,6 +452,9 @@ claude-code "Harmonise glassmorphism sur page Match"
 - Gold pour autre chose que champions
 - Données mockées/placeholder
 - Scroll vertical si évitable
+- **Interpréter les demandes utilisateur**
+- **Créer des TASKs sans validation visuelle**
+- **Prendre des décisions de design**
 
 ---
 
