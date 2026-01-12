@@ -41,7 +41,7 @@ const Index = () => {
           <span>🏆</span>
           <span>Ligue des Hyènes</span>
           <span className="ds-filter-separator">|</span>
-          <span>Saison 9</span>
+          <span style={{ marginLeft: 'auto' }}>Saison 9</span>
           <span className="ds-filter-arrow">▾</span>
         </div>
 
