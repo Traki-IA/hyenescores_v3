@@ -351,8 +351,9 @@ const Match = () => {
             setShowPicker(true);
           }}
         >
-          <span className="label">{journee}</span>
-          <span className="sublabel">({validatedCount}/5)</span>
+          <span className="label">
+            {journee} <span className="sublabel">({validatedCount}/5)</span>
+          </span>
         </button>
         {/* IMPORT - Reste identique */}
         <button
@@ -512,16 +513,6 @@ const Match = () => {
                       ))}
                   </select>
                 </div>
-
-                {/* Auto-validate button - only show when can validate */}
-                {canValidate && (
-                  <button
-                    className="auto-validate-btn"
-                    onClick={() => validateMatch(matchIdx)}
-                  >
-                    ✓
-                  </button>
-                )}
               </div>
             );
           })}
