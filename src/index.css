@@ -79,6 +79,17 @@
     --glow-cyan-strong: 0 0 15px rgba(0, 217, 255, 0.8), 0 0 25px rgba(0, 217, 255, 0.4);
     --shadow-menu: 0 4px 12px rgba(0, 217, 255, 0.3);
     --shadow-phone: 0 30px 80px rgba(0, 217, 255, 0.2);
+
+    /* v4.0 - Teal Opaque System */
+    --teal-page-bg: #0a1e1e;
+    --teal-card-bg: rgba(0, 100, 120, 0.25);
+    --teal-header-bg: rgba(0, 100, 120, 0.35);
+    --teal-row-hover: rgba(0, 100, 120, 0.4);
+
+    /* Borders renforcées */
+    --cyan-border: rgba(0, 217, 255, 0.4);
+    --cyan-border-strong: rgba(0, 217, 255, 0.6);
+    --cyan-border-title: rgba(0, 217, 255, 0.5);
   }
 
   .dark {
@@ -95,6 +106,7 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', sans-serif;
+    background: #0a1e1e !important;
   }
 
   html, body, #root {
@@ -415,8 +427,8 @@
 
 /* Page title */
 .ds-page-title {
-  background: rgba(0, 217, 255, 0.05);
-  border: 1px solid rgba(0, 217, 255, 0.4);
+  background: rgba(0, 100, 120, 0.25);
+  border: 1px solid rgba(0, 217, 255, 0.5);
   border-radius: 10px;
   padding: 10px 12px;
   text-align: center;
@@ -440,8 +452,8 @@
 /* Filter Bar */
 .ds-filter-bar {
   display: flex;
-  background: rgba(0, 217, 255, 0.02);
-  border: 1px solid rgba(0, 217, 255, 0.2);
+  background: rgba(0, 100, 120, 0.25);
+  border: 1px solid rgba(0, 217, 255, 0.4);
   border-radius: 10px;
   margin-bottom: 12px;
   overflow: hidden;
@@ -494,8 +506,8 @@
 /* Card container */
 .ds-card {
   flex: 1;
-  background: rgba(0, 217, 255, 0.03);
-  border: 1px solid rgba(0, 217, 255, 0.2);
+  background: rgba(0, 100, 120, 0.25);
+  border: 1px solid rgba(0, 217, 255, 0.4);
   border-radius: 12px;
   padding: 12px;
   overflow: hidden;
@@ -510,8 +522,8 @@
 }
 
 .ds-table thead {
-  background: rgba(0, 217, 255, 0.12);
-  border-bottom: 2px solid rgba(0, 217, 255, 0.3);
+  background: rgba(0, 100, 120, 0.35);
+  border-bottom: 2px solid rgba(0, 217, 255, 0.4);
 }
 
 .ds-table th {
@@ -539,7 +551,7 @@
 }
 
 .ds-table tbody tr:hover {
-  background: rgba(0, 217, 255, 0.08);
+  background: rgba(0, 100, 120, 0.4);
 }
 
 .ds-table td {
@@ -716,7 +728,7 @@
 /* Team select */
 .ds-team-select {
   background: transparent;
-  border: 1px solid rgba(0, 217, 255, 0.2);
+  border: 1px solid rgba(0, 217, 255, 0.4);
   border-radius: 6px;
   padding: 8px 6px;
   font-family: 'Rajdhani', sans-serif;
@@ -778,8 +790,8 @@
 
 /* Title with glassmorphism + glow */
 .classement-title-glass {
-  background: rgba(0, 217, 255, 0.05);
-  border: 1px solid rgba(0, 217, 255, 0.4);
+  background: rgba(0, 100, 120, 0.25);
+  border: 1px solid rgba(0, 217, 255, 0.5);
   border-radius: 10px;
   padding: 10px 12px;
   text-align: center;
@@ -806,8 +818,8 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background: rgba(0, 217, 255, 0.02);
-  border: 1px solid rgba(0, 217, 255, 0.2);
+  background: rgba(0, 100, 120, 0.25);
+  border: 1px solid rgba(0, 217, 255, 0.4);
   border-radius: 10px;
   padding: 8px 12px;
   margin: 0 8px 12px;
@@ -836,8 +848,8 @@
 
 /* Filter Bar 2 lignes - Classement */
 .ds-filter-bar-2lines {
-  background: rgba(0, 217, 255, 0.02);
-  border: 1px solid rgba(0, 217, 255, 0.2);
+  background: rgba(0, 100, 120, 0.25);
+  border: 1px solid rgba(0, 217, 255, 0.4);
   border-radius: 10px;
   padding: 8px 12px;
   margin-bottom: 8px;
@@ -998,7 +1010,7 @@
     max-width: 100vw;
     max-height: 100vh;
     min-width: 100vw;
-    background: #000;
+    background: #0a1e1e;
     border-radius: 0;
     border: none;
     box-shadow: none;
@@ -1120,8 +1132,8 @@
 
 /* Title with glassmorphism + glow */
 .match-title-glass {
-  background: rgba(0, 217, 255, 0.05);
-  border: 1px solid rgba(0, 217, 255, 0.4);
+  background: rgba(0, 100, 120, 0.25);
+  border: 1px solid rgba(0, 217, 255, 0.5);
   border-radius: 10px;
   padding: 10px 12px;
   text-align: center;
@@ -1145,8 +1157,8 @@
 /* 4-Segment Selection Bar */
 .match-segment-bar {
   display: flex;
-  background: rgba(0, 217, 255, 0.02);
-  border: 1px solid rgba(0, 217, 255, 0.2);
+  background: rgba(0, 100, 120, 0.25);
+  border: 1px solid rgba(0, 217, 255, 0.4);
   border-radius: 10px;
   margin-bottom: 12px;
   overflow: visible;
@@ -1287,8 +1299,8 @@
 
 /* EXEMPT Variante 4 - Two stacked lines */
 .exempt-v4 {
-  background: rgba(0, 217, 255, 0.05);
-  border: 1px solid rgba(0, 217, 255, 0.25);
+  background: rgba(0, 100, 120, 0.25);
+  border: 1px solid rgba(0, 217, 255, 0.4);
   border-radius: 8px;
   padding: 8px 12px;
   height: 48px;
@@ -1411,9 +1423,9 @@
   top: 100%;
   right: 0;
   margin-top: 4px;
-  background: rgba(10, 10, 10, 0.98);
+  background: rgba(10, 30, 30, 0.98);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 217, 255, 0.3);
+  border: 1px solid rgba(0, 217, 255, 0.4);
   border-radius: 8px;
   min-width: 150px;
   overflow: hidden;
@@ -1447,8 +1459,8 @@
 
 /* Matches Card */
 .matches-card {
-  background: rgba(0, 217, 255, 0.03);
-  border: 1px solid var(--glass-border);
+  background: rgba(0, 100, 120, 0.25);
+  border: 1px solid rgba(0, 217, 255, 0.4);
   border-radius: 16px;
   padding: 12px;
   overflow: hidden;
@@ -1459,9 +1471,9 @@
   grid-template-columns: 1fr 90px 1fr;
   gap: 8px;
   padding: 10px 8px;
-  background: rgba(0, 217, 255, 0.12);
+  background: rgba(0, 100, 120, 0.35);
   border-radius: 8px 8px 0 0;
-  border-bottom: 2px solid rgba(0, 217, 255, 0.3);
+  border-bottom: 2px solid rgba(0, 217, 255, 0.4);
   margin: -12px -12px 0 -12px;
 }
 
@@ -1529,8 +1541,8 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: rgba(0, 217, 255, 0.02);
-  border: 1px solid rgba(0, 217, 255, 0.2);
+  background: rgba(0, 100, 120, 0.25);
+  border: 1px solid rgba(0, 217, 255, 0.4);
   border-radius: 10px;
   padding: 10px 16px;
   margin-top: 12px;
@@ -1594,7 +1606,7 @@
 .team-select {
   width: 100%;
   background: transparent;
-  border: 1px solid rgba(0, 217, 255, 0.2);
+  border: 1px solid rgba(0, 217, 255, 0.4);
   border-radius: 6px;
   padding: 8px 6px;
   font-family: 'Rajdhani', sans-serif;
@@ -1710,8 +1722,8 @@
 .picker-modal {
   width: 90%;
   max-width: 400px;
-  background: rgba(10, 10, 10, 0.95);
-  border: 2px solid rgba(0, 217, 255, 0.3);
+  background: rgba(10, 30, 30, 0.98);
+  border: 2px solid rgba(0, 217, 255, 0.4);
   border-radius: 20px;
   padding: 20px;
 }
@@ -2102,8 +2114,8 @@
 
 /* Glassmorphism Title */
 .palmares-title-glass {
-  background: rgba(0, 217, 255, 0.05);
-  border: 1px solid rgba(0, 217, 255, 0.4);
+  background: rgba(0, 100, 120, 0.25);
+  border: 1px solid rgba(0, 217, 255, 0.5);
   border-radius: 10px;
   padding: 10px 12px;
   text-align: center;
@@ -2126,8 +2138,8 @@
 /* Fused Horizontal Filter Bar */
 .palmares-filter-bar {
   display: flex;
-  background: rgba(0, 217, 255, 0.02);
-  border: 1px solid rgba(0, 217, 255, 0.2);
+  background: rgba(0, 100, 120, 0.25);
+  border: 1px solid rgba(0, 217, 255, 0.4);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -2161,8 +2173,8 @@
 
 /* Table Card with integrated header */
 .palmares-table-card {
-  background: #000000;
-  border: 1px solid rgba(0, 217, 255, 0.2);
+  background: rgba(0, 100, 120, 0.25);
+  border: 1px solid rgba(0, 217, 255, 0.4);
   border-radius: 10px;
   overflow: hidden;
 }
@@ -2172,8 +2184,8 @@
   grid-template-columns: 60px 1fr 80px;
   gap: 8px;
   padding: 10px 12px;
-  background: rgba(0, 217, 255, 0.12);
-  border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+  background: rgba(0, 100, 120, 0.35);
+  border-bottom: 1px solid rgba(0, 217, 255, 0.4);
 }
 
 .palmares-table-header span {
@@ -2199,8 +2211,8 @@
   grid-template-columns: 60px 1fr 80px;
   gap: 8px;
   padding: 10px 12px;
-  background: #000000;
-  border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+  background: transparent;
+  border-bottom: 1px solid rgba(0, 217, 255, 0.15);
   transition: all 0.2s ease;
 }
 
@@ -2209,7 +2221,7 @@
 }
 
 .palmares-row:hover {
-  background: rgba(0, 217, 255, 0.08);
+  background: rgba(0, 100, 120, 0.4);
 }
 
 /* Season Column */
@@ -2349,8 +2361,8 @@
 
 /* Title with glassmorphism + glow 3 layers */
 .pantheon-title-glass {
-  background: rgba(0, 217, 255, 0.05);
-  border: 1px solid rgba(0, 217, 255, 0.4);
+  background: rgba(0, 100, 120, 0.25);
+  border: 1px solid rgba(0, 217, 255, 0.5);
   border-radius: 10px;
   padding: 10px 12px;
   text-align: center;
@@ -2375,8 +2387,8 @@
 }
 
 .pantheon-table-container {
-  background: rgba(0, 100, 120, 0.1);
-  border: 1px solid rgba(0, 217, 255, 0.2);
+  background: rgba(0, 100, 120, 0.25);
+  border: 1px solid rgba(0, 217, 255, 0.4);
   border-radius: 12px;
   overflow: hidden;
 }
@@ -2387,7 +2399,7 @@
 }
 
 .pantheon-table thead {
-  background: rgba(0, 100, 120, 0.15);
+  background: rgba(0, 100, 120, 0.35);
 }
 
 /* Ultra-compact headers */
