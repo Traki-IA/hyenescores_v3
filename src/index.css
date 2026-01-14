@@ -509,7 +509,7 @@
   background: var(--teal-card-bg);
   border: 1px solid var(--cyan-border);
   border-radius: 12px;
-  padding: 12px;
+  padding: 0 12px 12px 12px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -524,7 +524,6 @@
 .ds-table thead {
   background: var(--teal-header-bg);
   border-bottom: 2px solid var(--cyan-border);
-  margin: -12px -12px 0 -12px;
 }
 
 .ds-table th {
