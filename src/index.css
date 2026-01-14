@@ -524,7 +524,7 @@
 .ds-table thead {
   background: var(--teal-header-bg);
   border-bottom: 2px solid var(--cyan-border);
-  border-radius: 8px 8px 0 0;
+  border-radius: 12px 12px 0 0;
 }
 
 .ds-table th {
@@ -2401,7 +2401,7 @@
 
 .pantheon-table thead {
   background: var(--teal-header-bg);
-  border-radius: 8px 8px 0 0;
+  border-radius: 12px 12px 0 0;
 }
 
 /* Ultra-compact headers */
