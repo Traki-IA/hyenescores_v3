@@ -524,6 +524,7 @@
 .ds-table thead {
   background: var(--teal-header-bg);
   border-bottom: 2px solid var(--cyan-border);
+  margin: -12px -12px 0 -12px;
 }
 
 .ds-table th {
